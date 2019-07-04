@@ -1,0 +1,31 @@
+{
+  "name": "Trip Planner",
+  "short_name": "Trip Planner",
+  "lang": "en-US",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "theme_color": "#FF9800",
+  "background_color": "#FF9800",
+  "icons": [
+    {
+      "src": "https://cdn.glitch.com/c04e32b9-b9b8-404a-b79d-aeaf9434e781/icon-128x128.png?v=1559941293142",
+      "sizes": "128x128"
+    },
+    {
+      "src": "https://cdn.glitch.com/c04e32b9-b9b8-404a-b79d-aeaf9434e781/icon-192x192.png?v=1559941292939",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://cdn.glitch.com/c04e32b9-b9b8-404a-b79d-aeaf9434e781/icon-256x256.png?v=1559941293325",
+      "sizes": "256x256"
+    },
+    {
+      "src": "https://cdn.glitch.com/c04e32b9-b9b8-404a-b79d-aeaf9434e781/icon-384X384.png?v=1559941293527",
+      "sizes": "384x384"
+    },
+    {
+      "src": "https://cdn.glitch.com/25321536-290a-4386-a249-5c834115274e/icon-512x512.png?v=1559941017603",
+      "sizes": "512x512"
+    }
+  ]
+}

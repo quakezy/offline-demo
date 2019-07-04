@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta charset="utf-8">
+  <title>Traver advisor</title>
+  <!-- css TODO for mobile -->
+  <link rel="stylesheet" href="/styles/main.css" />
+  <script type="module"> 
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then(registration => {
+            console.log('Service Worker registered! 😎');
+          })
+          .catch(err => {
+            console.log('Registration failed 😫 ', err);
+          });
+      });
+    }
+
+    window.addEventListener('beforeinstallprompt', event => {
+      // Stash the event so it can be triggered later.
+      let deferredPrompt = event;
+
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      event.preventDefault();
+
+      // Attach the install prompt to a user gesture
+      document.querySelector('#installBtn').addEventListener('click', async event => {
+        // Show the prompt
+        deferredPrompt.prompt();
+
+        // Wait for the user to respond to the prompt
+        const choiceResult = await deferredPrompt.userChoice;
+
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the A2HS prompt');
+          document.querySelector('#installBanner').style.display = 'none';
+        } else {
+          console.log('User dismissed the A2HS prompt');
+        }
+        deferredPrompt = null;
+      });
+
+      // Update UI notify the user they can add to home screen
+      document.querySelector('#installBanner').style.display = 'flex';
+    });
+  </script>
+
+  <!-- Manifest File -->
+  <link rel="manifest" href="manifest.json" />
+</head>
+
+<body>
+  <header>
+    <h1>Traver advisor</h1>
+    <h3>workshop demo</h3>
+  </header>
+  <main style="margin-top:30px">
+<section id="installBanner">
+  <button id="installBtn">Install app</button>
+</section>
+    <div style="float:left;margin-left:10px">City</div>
+    <select id="city" style="float:left;margin-left:10px" onchange="onCityChanged()">
+      <option value="Beijing" selected="selected">Beijing</option>
+      <option value="Shanghai">Shanghai</option>
+    </select>
+    <div style="float:left;margin-left:40px">Days</div>
+    <select id="days" style="float:left;margin-left:10px">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3" selected="selected">3</option>
+      <option value="4">4</option>
+    </select>
+    <div style="float:left;margin-left:40px">Type</div>
+    <select id="type" style="float:left;margin-left:10px">
+      <option value="relax">relax</option>
+      <option value="hardcore" selected="selected">hardcore</option>
+    </select>
+    <button style="margin-left:60px" onclick="onSearchClicked()">Get Plan</button>
+
+    <div id="container" style="width:100%;height:200px">
+      <!-- plan DOMs will be inserted here -->
+      <div class="dialog-container">
+        <dialog id="dialog-model" class="dialog-model">
+            <h3 class="dialog-header"  id="dialog-title">Details</h3>
+            <div class="dialog-body" id="dialog-message"></div>
+            <image src="resources/travel.jpg"  style="width: 450px;" id="dialog-image"></image>
+            <div class="dialog-footer">
+                <button id="close-dialog" class="close-dialog-btn" type="button">OK</button>
+            </div>
+        </dialog>
+      </div>
+      <div id="table-container">
+
+      </div>
+    </div>
+  </main>
+  <script src = "js/cities.js"></script>
+  <script src = "js/model.js"></script>
+  <script src = "js/dialog.js"></script>
+  <script src = "js/content.js"></script>
+  <script src = "js/main.js"></script>
+</body>
+</html>
